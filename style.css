@@ -1,0 +1,71 @@
+/* @media (prefers-color-scheme: dark){
+    body {color:#fff;background:rgb(39, 39, 39)!important}
+    header {fill: #fff!important;} */
+/* } */
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+
+body{
+    background: #f5f5f5;
+    margin:1em auto;
+    max-width:40em;
+    padding:0 .62em;
+    font:1.4em/1.62 'Inter';
+}
+
+header {
+    text-align: center;
+    background-image: url(static/svg/topography.svg);
+    border: gray 1px solid;
+    border-radius: 10px;
+    padding-bottom: 0.6rem;
+}
+
+h1,h2,h3 {
+    line-height:1.2;
+}
+
+h2::before{
+    content: '× ';
+}
+
+h2:hover::before{
+    color: #8b0000;
+}
+
+a:link,a:visited {
+    text-decoration: none;
+}
+
+a:hover,a:active {
+    text-decoration: underline;
+}
+
+a {
+    color: #8b0000;
+    font-weight: bold;
+}
+
+ul{
+    list-style: none;
+}
+
+.projects ul li::before {
+    content: "-> ";
+}
+.projects li > a::after {
+    content: " : ";
+}
+
+.papers li::before{
+    content: url('static/svg/paperclip.svg');
+    display: inline-block;
+    transform: rotate(90deg);
+    margin-right: 0.6rem;
+}
+
+@media print{
+    body{
+        max-width:none
+    }
+}
