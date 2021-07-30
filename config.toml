@@ -1,0 +1,23 @@
+# The URL the site will be built for
+base_url = "https://takun.org"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+taxonomies = [
+    {name = "tags"}
+]
+
+[markdown]
+# Whether to do syntax highlighting
+highlight_code = true
+highlight_theme = "monokai" # "nyx-bold" # "ayu-light" # "charcoal" # "monokai"
+
+external_links_target_blank = true
+external_links_no_follow = true
+
+[extra]
+# Put all your custom variables here

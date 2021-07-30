@@ -1,0 +1,14 @@
+{% extends "base.html" %} 
+
+{% import "post-preview.html" as post_macros %}
+
+{% block content %}
+<h1 class="title">{{ section.title }}</h1>
+
+{% for post in section.pages %}
+    {{ post_macros::post_preview(post=post) }}
+    {% if not loop.last %}
+        <br><br>
+    {% endif %}
+{% endfor %}
+{% endblock content %}

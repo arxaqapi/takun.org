@@ -1,0 +1,137 @@
+:root {
+    --color-gray: #333333;
+    --color-gray-rgb: 51, 51, 51;
+    --color-white: #f6f6f6;
+    --color-white-rgb: 246, 246, 246;
+    --color-light-gray: #e8e8e8;
+    --color-light-gray-rgb: 232, 232, 232;
+    --color-red: #990100;
+    --color-red-rgb: 153, 1, 0;
+    --color-light-red: #b90504;
+    --color-light-red-rgb: 185, 5, 4;
+
+    --main-color: var(--color-red);
+    --main-color-rgb: var(--color-red-rgb);
+    --main-contrast-color: var(--color-gray);
+    --main-contrast-color-rgb: var(--color-gray-rgb);
+    --main-light: var(--color-white);
+    --main-dark: var(--color-gray);
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: var(--color-white);
+        background: var(--color-gray) !important;
+    }
+    a:link {
+        color: #9cf;
+    }
+    a:hover,
+    a:visited:hover {
+        color: #cef;
+    }
+    a:visited {
+        color: #c9f;
+    }
+}
+
+
+::selection {
+    background-color: rgba(var(--main-color-rgb), 0.1);
+    color: var(--main-color);
+}
+
+body {
+    margin: 0 auto;
+    max-width: 40em;
+    padding: 0 0.62em;
+    font: 1.2em/1.62 sans-serif;
+    background: var(--color-white);
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}
+
+@media print {
+    body {
+        max-width: 40em;
+    }
+}
+
+header {
+    text-align: center;
+    padding-bottom: 0.6rem;
+}
+
+footer {
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+nav {
+    margin-top: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+pre {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-red);
+    text-underline-offset: .08em;
+}
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+nav > a {
+    text-decoration: none;
+    color: var(--color-gray);
+    position: absolute;
+}
+nav > a:hover {
+    text-decoration: none;
+    border-bottom: 4px var(--color-red) solid;
+}
+
+nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+nav > ul > li {
+    display: inline;
+}
+nav {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+
+.post {
+    display: block;
+}
+
+/* .post-preview {
+    display: inline-block;
+} */
+
+hr {
+    border: 1px lightgray solid;;
+}

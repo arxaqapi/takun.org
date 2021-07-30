@@ -1,0 +1,30 @@
+{% macro post_preview(post) %}
+<h3>
+    <a href="{{ post.permalink }}">{{ post.title }}</a>
+</h3>
+<small>
+    <i>
+        {% if post.date %} 
+            {{ post.date| date(format="%B %d, %Y") }} - 
+        {% endif %} 
+        {{ post.word_count }} words - {{ post.reading_time }} mins
+    </i>
+</small>
+<div>
+    {% if post.extra.summary -%} 
+        {{ post.extra.summary | markdown(inline=true)}}
+    {% else %} 
+        {{ post.content | safe | striptags | truncate(length=300) }} 
+    {%- endif %}
+
+    <a href="{{ post.permalink }}">read more ...</a>
+</div>
+<small>
+    🏷️ {% for tag in post.taxonomies.tags %}
+        <a href="/tags/{{ tag }}"> {{ tag }} </a>
+        {% if not loop.last %}
+            - 
+        {% endif %} 
+    {% endfor %}
+</small>
+{% endmacro input %}
