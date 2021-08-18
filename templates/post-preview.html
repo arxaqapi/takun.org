@@ -16,7 +16,7 @@
     {% else %} 
         {{ post.content | safe | striptags | truncate(length=300) }} 
     {%- endif %}
-
+    <br>
     <a href="{{ post.permalink }}">read more ...</a>
 </div>
 <small>
