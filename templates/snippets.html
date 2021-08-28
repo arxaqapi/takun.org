@@ -1,0 +1,15 @@
+{% extends "base.html" %} 
+
+{% block content %}
+<h1 class="title">{{ section.title }}</h1>
+A collection of usefull snippets I regularly use ... and forget about.
+{% for snippet in section.pages %}
+    <h2>
+        {{ snippet.title }}
+    </h2>
+    {{ snippet.content | safe }}
+    {% if not loop.last %}
+        <br><br>
+    {% endif %}
+{% endfor %}
+{% endblock content %}
