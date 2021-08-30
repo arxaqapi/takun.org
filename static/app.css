@@ -79,6 +79,13 @@ nav {
     margin-bottom: 2rem;
 }
 
+blockquote {
+    background: lightgray;
+    margin: 0px auto;
+    padding: 0.6rem;
+    border-left: 2px solid var(--color-red);
+}
+
 h1,
 h2,
 h3 {
