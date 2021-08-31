@@ -86,6 +86,26 @@ blockquote {
     border-left: 2px solid var(--color-red);
 }
 
+table {
+    border: solid 1px var(--color-red);
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+table thead th {
+    border: solid 2px var(--color-red);
+    background-color: rgba(var(--main-color-rgb), 0.1);
+    padding: 10px;
+    text-align: left;
+}
+table tbody td {
+    border: solid 1px var(--color-red);
+    color: #333;
+    padding: 10px;
+}
+tr:nth-child(even) {
+    background: lightgray;
+}
+
 h1,
 h2,
 h3 {
