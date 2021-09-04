@@ -4,7 +4,7 @@ slug = "systemd-boot-target"
 +++
 
 
-#### Deacivate the graphical interface
+#### Disable the graphical interface
 This is a multi-user and non-graphical runlevel. Multiple users can log in via local consoles/terminals or remote network access.
 ```bash
 systemctl set-default multi-user.target
