@@ -55,6 +55,6 @@ $$
 With these generic functions it is now easy to get the derivative value at a certain point by replacing $x$ and $y$ with the corresponding values.
 
 
-### afterword
+### Afterword
 
 This article should be updated in the future with an intuitive explanation about derivatives. For the moment I assume that the reader has the necessary mathematical knowledge to understand the notation and the words used.
