@@ -2,11 +2,11 @@
 draft = false
 title = "What are partial derivatives?"
 slug = "partial-derivatives"
-date = 2021-09-05
+date = 2021-09-19
 [taxonomies]
 tags = ["math"]
 [extra]
-summary = "Understanding how to calculate partial derivatives is fondamental to understand the maths behind machine learning algorithms."
+summary = "How does one calculate the partial derivatives of a multivariate function?"
 +++
 
 
