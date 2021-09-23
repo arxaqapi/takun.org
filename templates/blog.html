@@ -5,6 +5,10 @@
 {% block content %}
 <h1 class="title">{{ section.title }}</h1>
 
+<i>
+    This blog is still a work in progress, a lot of the current content will be updated in the future.
+</i>
+
 {% for post in section.pages %}
     {{ post_macros::post_preview(post=post) }}
     {% if not loop.last %}
