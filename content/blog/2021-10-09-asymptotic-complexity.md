@@ -92,7 +92,7 @@ To get the corresponding asymptotic complexity of this example, we first need to
 
 This gives us the following equation:
 $${{\frac{\sqrt n}{n} + \frac{2n^4}{n} - \frac{4n^2}{n}} \over \frac{4}{n} + \frac{3n}{n}}$$
-Reduce by $n$ to get:
+Divide by $n$ to get:
 $${{\frac{\sqrt n}{n} + 2n^3 - 4n} \over \frac{4}{n} + 3}$$
 
 
@@ -132,3 +132,5 @@ Let's visualize $f1$ and $f2$ :
         }
     })
 </script>
+
+As expected, $f1$ clearly dominates $f2$, and thus is the upper-bound (here an asymptotically tight-bound for $T_2$).
