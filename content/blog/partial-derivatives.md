@@ -36,8 +36,8 @@ So that:
 
 $$
 \begin{aligned}
-   \frac{\partial f(x,y)}{\partial x}(x,y)&=\frac{\partial}{\partial x}(x^2\htmlStyle{color: red;}{y}+sin(\htmlStyle{color: red;}{y})) \\\\
-   &=2x\htmlStyle{color: red;}{y}
+   \frac{\partial f(x,y)}{\partial x}(x,y)&=\frac{\partial}{\partial x}(x^2 {\color{red} y} +sin({\color{red} y})) \\\\
+   &=2x{\color{red}y}
 \end{aligned}
 $$
 Since $sin(y)$ is threated like a constant, it is nulled out.
@@ -45,8 +45,8 @@ Since $sin(y)$ is threated like a constant, it is nulled out.
 And for the partial derivative of $f(...)$ whith respect to $y$ we simply threat $x$ as a constant this time:
 $$
 \begin{aligned}
-   \frac{\partial f(x,y)}{\partial y}(x,y)&=\frac{\partial}{\partial y}(\htmlStyle{color: red;}{x^2}y+sin(y)) \\\\
-   &=\htmlStyle{color: red;}{x^2}+cos(y)
+   \frac{\partial f(x,y)}{\partial y}(x,y)&=\frac{\partial}{\partial y}({\color{red}x^2}y+sin(y)) \\\\
+   &={\color{red}x^2}+cos(y)
 \end{aligned}
 $$
 
