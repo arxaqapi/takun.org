@@ -32,7 +32,7 @@ let rec f n = match n with
 
 Beautiful, isn't it?
 
-Well not really, the runtime complexity of this algorithm is horrible. For each call or $F$ we do two additional calls most of the time. This gives the horrendus looking asymptotic complexity of $O(2^n)$ .
+Well not really, the runtime complexity of this algorithm is horrible. For each call of $F$ we do two additional calls most of the time. This gives the horrendus looking asymptotic complexity of $O(2^n)$ .
 
 If we dissect the execution of our algorithm for $n=4$ we have the following calls being made.
 
@@ -43,7 +43,7 @@ If we dissect the execution of our algorithm for $n=4$ we have the following cal
     - For $\color{green}F(2)$, call $F(1) + F(0)$ which returns $1 + 0$ .
 - $F(4) = 2 + 1 = 3$ 
 
-As one can clearly see, $F(2)$ is being computed two times highlighted in green. And this is only a small number, as said before, the complexity of the naïve recusive approach is $O(2^n)$.
+As one can clearly see, $F(2)$ is being computed two times (highlighted in green). And this is only for a small value, as said before, the complexity of the naïve recusive approach is $O(2^n)$.
 
 But since there are redundant calls being made, a simple solution would be to store the intermediate results, no?
 
@@ -51,7 +51,7 @@ Yes and this is exactly what dynamic programming is all about.
 
 
 ### Introducing memoization
-Each time we call $F(n)$, we simply check if the value has already been computed. The nature of the problems allows us to store the intermediate values in a simple array.
+Each time we call $F(n)$, we simply check if the value has already been computed. The nature of the problem allows us to store the intermediate values in a simple array.
 
 ```ocaml
 let f_memo n = 
@@ -68,7 +68,7 @@ let f_memo n =
 ```
 The code looks a little bit complicated, but it is, in fact, really simple.
 
-What is going on is that we first create an array of size $n+1$ which will hold all the intermediate values of our computation and removing all duplicate recursive calls.
+What is going on is that we first create an array of size $n+1$ which will hold all the intermediate values of our computation and thus allowing us to remove all duplicate recursive calls.
 
 We simpy check if the wanted value has already been computed, if this is the case, we simply return the value contained in our **memoization** structure (here a simple array).
 
