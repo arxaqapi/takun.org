@@ -17,3 +17,11 @@ let rec fibo = function
 
 let () = (fibo[@tailcall]) 8 |> Printf.printf "fibo 8 = %d\n" 
 ```
+
+As expected, the compiler complains:
+```cpp
+let () = (fibo[@tailcall]) 8 |> Printf.printf "fibo 8 = %d\n" 
+             ^^^^^^^^^^^^^^^^^^^
+Warning 51 [wrong-tailcall-expectation]: expected tailcall
+fibo 8 = 21
+```
