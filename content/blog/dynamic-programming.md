@@ -1,11 +1,11 @@
 +++
+draft = true
 title = "Dynamic programming"
 date = 2021-10-11
 [taxonomies]
 tags = ["cs", "algorithms"]
 [extra]
 summary = "Introducing... Dynamic programming"
-draft = true
 +++
 
 

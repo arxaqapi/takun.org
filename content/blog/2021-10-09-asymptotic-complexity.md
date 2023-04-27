@@ -1,11 +1,11 @@
 +++
+draft = true
 title = "A few notes on asymptotic complexity and big-O notation"
 date = 2021-10-09
 [taxonomies]
 tags = ["cs", "math"]
 [extra]
 summary = "Exploring Big-O notation, which is a central part to every CS major algorithm class."
-draft = true
 +++
 
 For the moment it is assumed that the reader knows what the asymptotic complexity is. An update will follow which will introduce the concepts of algorithm runtime and asymptotic complexity. 

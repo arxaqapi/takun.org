@@ -1,4 +1,5 @@
 +++
+draft = true
 title = "Fedora on WSL"
 slug = "fedora-on-wsl"
 date = 2021-08-30
@@ -6,7 +7,6 @@ date = 2021-08-30
 tags = ["linux", "windows"]
 [extra]
 summary = "Installing fedora (34) on WSL"
-draft = true
 +++
 
 I hate windows.
