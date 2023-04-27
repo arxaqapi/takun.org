@@ -1,5 +1,4 @@
 +++
-draft = false
 title = "What are partial derivatives?"
 slug = "partial-derivatives"
 date = 2021-09-19
@@ -7,6 +6,7 @@ date = 2021-09-19
 tags = ["math"]
 [extra]
 summary = "How does one calculate the partial derivatives of a multivariate function?"
+draft = true
 +++
 
 
