@@ -17,7 +17,7 @@ taxonomies = [
 [markdown]
 # Whether to do syntax highlighting
 highlight_code = true
-highlight_theme = "monokai" # "nyx-bold" # "ayu-light" # "charcoal" # "monokai"
+highlight_theme = "OneHalfLight" # cheerfully-light gruvbox-dark "nyx-bold" # "ayu-light" # "charcoal" # "monokai"
 
 external_links_target_blank = true
 external_links_no_follow = true

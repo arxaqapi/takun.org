@@ -16,6 +16,8 @@
     --main-contrast-color-rgb: var(--color-gray-rgb);
     --main-light: var(--color-white);
     --main-dark: var(--color-gray);
+
+    box-sizing: border-box;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,6 +70,10 @@ header {
     padding-bottom: 0.6rem;
 }
 
+header > aside {
+    margin: 1.4rem 0;
+}
+
 footer {
     margin-bottom: 1em;
     text-align: center;
@@ -112,10 +118,45 @@ h3 {
     line-height: 1.2;
 }
 
-pre {
-    padding: 10px;
-    border-radius: 5px;
-    overflow: auto;
+h1,h2 {
+    margin-top: 2.8rem;
+    line-height: 1.2;
+}
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 2rem;
+    line-height: 1.2;
+}
+
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+    color: var(--color-red);
+    letter-spacing: -0.05em;
+}
+
+h2::before {
+    content: '# '
+}
+
+h3::before {
+    content: '## '
+}
+
+h4::before {
+    content: '### '
+}
+
+h5::before {
+    content: '#### '
+}
+
+h6::before {
+    content: '##### '
 }
 
 a {
@@ -148,7 +189,7 @@ nav > ul > li {
 }
 nav {
     text-align: center;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
 }
 
 
@@ -160,6 +201,56 @@ nav {
     display: inline-block;
 } */
 
+blockquote {
+    background: rgb(237, 237, 237);
+    margin: 0;
+    /* margin-left: 1rem; */
+    padding: 0.6rem;
+    border-left: 2px solid var(--color-red);
+}
+
+/* Code Blocks */
+pre {
+    padding: 10px;
+    overflow: auto;
+    border: 1px solid rgba(var(--main-color-rgb), 0.5);
+    /* box-shadow: 6px 6px rgb(44, 44, 44); */
+}
+
+/* standalone code block `` */
+code {
+    background-color: #000a2008;
+    border: 1px solid #0000000d;
+    border-radius: 5px;
+    color: #262626bf;
+    font-family: Menlo, sans-serif;
+    font-size: 1rem;
+    line-height: 1rem;
+    padding: .125rem 0.18rem;
+    white-space: pre-wrap;
+}
+
+pre > code {
+    background-color: inherit;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+}
+
 hr {
     border: 1px lightgray solid;;
+}
+
+details {
+    background-color: rgba(var(--main-color-rgb), 0.1);
+    border-left: 2px solid rgba(var(--main-color-rgb), 0.4);
+    padding: 1rem;
+}
+
+.paper {
+    border-left: 4px solid var(--color-red);
+}
+.paper {
+    padding-left: 1rem;
 }
