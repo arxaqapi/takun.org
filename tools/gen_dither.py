@@ -44,8 +44,8 @@ PAPERS = [
     ("babyhubert", ["self-supervised", "speech", "child"]),
     ("vtc-challenges", ["speech", "benchmark", "child"]),
     ("fifteen-years-longform", ["longform", "child", "benchmark"]),
-    ("searching-search-spaces", ["evolution", "self-supervised"]),
-    ("analogies-sentences", ["analogy", "speech"]),
+    ("searching-search-spaces", ["evolution"]),
+    ("analogies-sentences", ["analogy"]),
 ]
 
 SIZE = 56  # base resolution of a fingerprint (upscaled x2 on save)
@@ -300,8 +300,8 @@ def make_hero(w=560, h=150, seed=11):
 
 
 if __name__ == "__main__":
-    make_hero()
+    make_hero(seed=2)
     for slug, tags in PAPERS:
-        make_fingerprint(slug, tags)
+        make_fingerprint(slug, tags, SIZE)
         print(f"{slug:26s} <- {', '.join(tags)}")
     print("done ->", OUT)

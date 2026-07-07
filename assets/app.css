@@ -1,10 +1,10 @@
-/* =========================================================================
-   takun.org — "field notebook / riso" redesign
-   Paper & ink, one oxblood accent, mono utility labels, dithered decoration.
-   ========================================================================= */
+/*  ========================================================================
+    takun.org — "field notebook / riso" redesign
+    Paper & ink, one oxblood accent, mono utility labels, dithered decoration.
+    ======================================================================== */
 
 :root {
-    --paper: #f4f0e6;
+    --paper: #f4f0f0;
     --paper-2: #ece7d9;
     --ink: #1f1d1a;
     --ink-soft: #4a463f;
