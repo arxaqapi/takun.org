@@ -288,11 +288,11 @@ def make_hero(w=560, h=150, seed=11):
         (0.60, 0.13, 0.72),
         (0.80, 0.16, 0.90),
     ]:
-        ridge = horizon + _hero_ridge(w, rng, amp)
+        ridge = horizon + _hero_ridge(w, rng, amp * 2, octaves=10)
         for x in range(w):
             below = yy[:, 0] >= ridge[x]
             depth = np.clip((yy[:, 0] - ridge[x]) / (1 - ridge[x] + 1e-6), 0, 1)
-            val = dark - 0.25 * depth
+            val = (dark * 0.8) - 0.25 * depth
             field[below, x] = np.minimum(field[below, x], val[below])
     field = np.clip(field, 0, 1)
     to_png(floyd_steinberg(field), os.path.join(OUT, "hero.png"))
