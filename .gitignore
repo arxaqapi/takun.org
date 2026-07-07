@@ -1,3 +1,4 @@
 archive
 .DS_STORE
 *.zip
+__pycache__

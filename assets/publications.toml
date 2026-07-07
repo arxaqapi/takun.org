@@ -1,0 +1,95 @@
+[[publication]]
+key = "sheth2026derivingbenchmarkingdatasetslongform"
+type = "misc"
+title = "Deriving Benchmarking Datasets from Long-Form Recordings: Challenges and Opportunities"
+authors = ["Kaveri K. Sheth", "Lawrence Borst", "Tarek Kunze", "Marvin Lavechin", "Okko Räsänen", "Sho Tsuji", "Loann Peurey", "Alix Bourrée", "Alejandrina Cristia"]
+year = 2026
+tags = ["benchmark", "longform", "child"]
+preprint = "https://arxiv.org/abs/2607.03201"
+
+[[publication]]
+key = "charlot2026contextawarechilddirectedspeechdetection"
+type = "misc"
+title = "Context-aware child-directed speech detection from long-form recordings"
+authors = ["Théo Charlot", "Tarek Kunze", "Kaveri K. Sheth", "Alejandrina Cristia", "Marvin Lavechin"]
+year = 2026
+tags = ["speech", "child", "longform"]
+preprint = "https://arxiv.org/abs/2606.01134"
+code = "https://github.com/LAAC-LSCP/addressee"
+
+[[publication]]
+key = "charlot2026babyhubertmultilingualselfsupervisedlearning"
+type = "misc"
+title = "BabyHuBERT: Multilingual Self-Supervised Learning for Segmenting Speakers in Child-Centered Long-Form Recordings"
+authors = ["Théo Charlot", "Tarek Kunze", "Maxime Poli", "Alejandrina Cristia", "Emmanuel Dupoux", "Marvin Lavechin"]
+year = 2026
+tags = ["self-supervised", "speech", "child"]
+preprint = "https://github.com/LAAC-LSCP/VTC"
+code = "https://github.com/LAAC-LSCP/VTC"
+
+[[publication]]
+key = "kunze25_interspeech"
+type = "inproceedings"
+title = "Challenges in Automated Processing of Speech from Child Wearables: The Case of Voice Type Classifier"
+authors = ["Tarek Kunze", "Marianne Métais", "Hadrien Titeux", "Lucas Elbert", "Joseph Coffey", "Emmanuel Dupoux", "Alejandrina Cristia", "Marvin Lavechin"]
+year = 2025
+booktitle = "Interspeech 2025"
+pages = "2845--2849"
+doi = "10.21437/Interspeech.2025-1962"
+issn = "2958-1796"
+# website extras
+tags = ["speech", "benchmark", "child"]
+preprint = "https://arxiv.org/abs/2506.11074"
+code = "https://github.com/LAAC-LSCP/VTC-IS-25"
+[publication.materials]
+poster = "assets/papers/2025_IS_vtc_poster.pdf"
+paper = "https://www.isca-archive.org/interspeech_2025/kunze25_interspeech.pdf"
+
+[[publication]]
+key = "peurey25_interspeech"
+type = "inproceedings"
+title = "Fifteen Years of Child-Centered Long-Form Recordings: Promises, Resources, and Remaining Challenges to Validity"
+authors = ["Loann Peurey", "Marvin Lavechin", "Tarek Kunze", "Manel Khentout", "Lucas Gautheron", "Emmanuel Dupoux", "Alejandrina Cristia"]
+year = 2025
+booktitle = "Interspeech 2025"
+pages = "3948--3952"
+doi = "10.21437/Interspeech.2025-1987"
+issn = "2958-1796"
+tags = ["longform", "child", "benchmark"]
+preprint = "https://arxiv.org/abs/2506.11075"
+[publication.materials]
+paper = "https://www.isca-archive.org/interspeech_2025/peurey25_interspeech.pdf"
+
+[[publication]]
+key = "kunze2024_cec"
+type = "inproceedings"
+title = "Searching Search Spaces: Meta-evolving a Geometric Encoding for Neural Networks"
+authors = ["Tarek Kunze", "Paul Templier", "Dennis G. Wilson"]
+year = 2024
+booktitle = "2024 IEEE Congress on Evolutionary Computation (CEC)"
+pages = "1-8"
+doi = "10.1109/CEC60901.2024.10612026"
+month = "June"
+tags = ["evolution"]
+preprint = "https://arxiv.org/abs/2403.14019"
+[publication.materials]
+code = "https://github.com/arxaqapi/gene.jax"
+paper = "assets/papers/2024_cec_meta_gene.pdf"
+
+[[publication]]
+key = "afantenos2021_analogical_proportions"
+type = "inproceedings"
+title = "Analogies Between Sentences: Theoretical Aspects - Preliminary Experiments"
+authors = ["Stergos Afantenos", "Tarek Kunze", "Suryani Lim", "Henri Prade", "Gilles Richard"]
+year = 2021
+booktitle = "Symbolic and Quantitative Approaches to Reasoning with Uncertainty"
+publisher = "Springer International Publishing"
+address = "Cham"
+pages = "3--18"
+isbn = "978-3-030-86772-0"
+editor = "Vejnarová, Jiřina and Wilson, Nic"
+tags = ["analogy"]
+venue_shortcode = "ECSQARU"
+[publication.materials]
+code = "https://github.com/arxaqapi/analogy-classifier"
+paper = "assets/papers/Afantenos2021_Analogies.pdf"

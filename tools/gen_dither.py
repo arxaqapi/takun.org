@@ -29,6 +29,8 @@ import os
 import numpy as np
 from PIL import Image
 
+from build import slugify, load_publications
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.normpath(os.path.join(HERE, "..", "dither"))
 os.makedirs(OUT, exist_ok=True)
@@ -38,15 +40,7 @@ os.makedirs(OUT, exist_ok=True)
 # Order matches index.html. Add / reorder tags to restyle a fingerprint.
 # Available tags are defined in TAG_FEELS below.
 # ---------------------------------------------------------------------------
-PAPERS = [
-    ("benchmarking-longform", ["benchmark", "longform", "child"]),
-    ("context-aware-cds", ["speech", "child", "longform"]),
-    ("babyhubert", ["self-supervised", "speech", "child"]),
-    ("vtc-challenges", ["speech", "benchmark", "child"]),
-    ("fifteen-years-longform", ["longform", "child", "benchmark"]),
-    ("searching-search-spaces", ["evolution"]),
-    ("analogies-sentences", ["analogy"]),
-]
+PAPERS = [(slugify(p["title"]), p.get("tags", [])) for p in load_publications()]
 
 SIZE = 56  # base resolution of a fingerprint (upscaled x2 on save)
 
