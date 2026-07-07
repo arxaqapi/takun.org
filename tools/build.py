@@ -92,7 +92,7 @@ def author_site(name):
 def format_authors(names):
     chunks = []
     for name in names:
-        disp = html.escape(initials(name))
+        disp = html.escape(name)
         if norm(name) in ME_KEYS:
             chunks.append(f"<b>{disp}</b>")
         else:
@@ -158,7 +158,7 @@ def render(pub):
         venue_s = pub["venue_shortcode"]
     elif pub["type"] == "misc":
         venue_s = f"arXiv"
-    elif "" in pub:
+    elif "booktitle" in pub:
         venue_s = pub["booktitle"]
 
     return f"""        <article class="paper">
@@ -168,7 +168,7 @@ def render(pub):
                     {html.escape(title)}
                 </a>
                 <span class="meta authors">{authors_html}</span>
-                <span class="venue">{venue_s} {pub["year"]}</span>
+                <span class="venue">{venue_s.replace(str(pub['year']), '').strip()} {pub["year"]}</span>
                 {links_block}
             </div>
         </article>"""
