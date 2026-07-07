@@ -1,2 +1,3 @@
-# do not track the built website
-public/
+archive
+.DS_STORE
+*.zip
