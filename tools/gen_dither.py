@@ -22,27 +22,14 @@ while the per-slug seed keeps each individual image unique and stable.
 dark mode inverts in CSS).
 """
 
+from pathlib import Path
 import hashlib
 import math
-import os
 
 import numpy as np
 from PIL import Image
 
 from build import slugify, load_publications
-
-HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.normpath(os.path.join(HERE, "..", "dither"))
-os.makedirs(OUT, exist_ok=True)
-
-# ---------------------------------------------------------------------------
-# Publications: slug + the tags that shape its fingerprint.
-# Order matches index.html. Add / reorder tags to restyle a fingerprint.
-# Available tags are defined in TAG_FEELS below.
-# ---------------------------------------------------------------------------
-PAPERS = [(slugify(p["title"]), p.get("tags", [])) for p in load_publications()]
-
-SIZE = 56  # base resolution of a fingerprint (upscaled x2 on save)
 
 
 # ---------------------------------------------------------------------------
@@ -229,7 +216,7 @@ TAG_WEIGHT = {
 # ---------------------------------------------------------------------------
 # COMPOSE a fingerprint from a paper's tags
 # ---------------------------------------------------------------------------
-def make_fingerprint(slug, tags, size=SIZE):
+def make_fingerprint(slug, tags: list[str], size: int, output_path: Path):
     n = size
     x, y = _grid(n)
     acc = np.zeros((n, n), np.float32)
@@ -254,7 +241,7 @@ def make_fingerprint(slug, tags, size=SIZE):
     field = np.clip(acc * (0.30 + 0.70 * vig), 0, 1)
 
     bits = floyd_steinberg(field)
-    to_png(bits, os.path.join(OUT, f"{slug}.png"))
+    to_png(bits, output_path / f"{slug}.png")
     return slug
 
 
@@ -272,7 +259,7 @@ def _hero_ridge(w, rng, amp, octaves=5):
     return (y - 0.5) * amp
 
 
-def make_hero(w=560, h=150, seed=11):
+def make_hero(output_path: Path, w: int = 560, h: int = 150, seed: int = 11):
     rng = np.random.default_rng(seed)
     yy = np.linspace(0, 1, h)[:, None]
     field = 0.15 + 0.85 * (1 - yy[:, 0])
@@ -289,13 +276,24 @@ def make_hero(w=560, h=150, seed=11):
             val = (dark * 0.8) - 0.25 * depth
             field[below, x] = np.minimum(field[below, x], val[below])
     field = np.clip(field, 0, 1)
-    to_png(floyd_steinberg(field), os.path.join(OUT, "hero.png"))
+    to_png(floyd_steinberg(field), output_path / "hero.png")
     print("hero.png", w * 2, "x", h * 2)
 
 
 if __name__ == "__main__":
-    make_hero(seed=2)
+    OUT_PATH = Path("dither")
+    OUT_PATH.mkdir(parents=True, exist_ok=True)
+
+    # ---------------------------------------------------------------------------
+    # Publications: slug + the tags that shape its fingerprint.
+    # Order matches index.html. Add / reorder tags to restyle a fingerprint.
+    # Available tags are defined in TAG_FEELS below.
+    # ---------------------------------------------------------------------------
+    PAPERS = [(slugify(p["title"]), p.get("tags", [])) for p in load_publications()]
+    SIZE = 56  # base resolution of a fingerprint (upscaled x2 on save)
+
+    make_hero(output_path=OUT_PATH, seed=2)
     for slug, tags in PAPERS:
-        make_fingerprint(slug, tags, SIZE)
+        make_fingerprint(slug, tags, SIZE, output_path=OUT_PATH)
         print(f"{slug:26s} <- {', '.join(tags)}")
-    print("done ->", OUT)
+    print("done ->", OUT_PATH)

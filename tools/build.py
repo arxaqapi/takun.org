@@ -168,7 +168,7 @@ def render(pub):
                     {html.escape(title)}
                 </a>
                 <span class="meta authors">{authors_html}</span>
-                <span class="venue">{venue_s.replace(str(pub['year']), '').strip()} {pub["year"]}</span>
+                <span class="venue">{venue_s.replace(str(pub["year"]), "").strip()} {pub["year"]}</span>
                 {links_block}
             </div>
         </article>"""
