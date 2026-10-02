@@ -140,15 +140,15 @@ def render(pub):
 
     links = collect_links(pub, title_url)
     link_lines = "\n".join(
-        f'                    <a href="{html.escape(url)}" target="_blank" '
+        f'                            <a href="{html.escape(url)}" target="_blank" '
         f'rel="noopener noreferrer">{html.escape(label)}</a>'
         for label, url in links
     )
     links_block = (
         f"""
-                <nav class="links">
+                        <nav class="links">
 {link_lines}
-                </nav>"""
+                        </nav>"""
         if links
         else ""
     )
@@ -157,22 +157,26 @@ def render(pub):
     if "venue_shortcode" in pub:
         venue_s = pub["venue_shortcode"]
     elif pub["type"] == "misc":
-        venue_s = f"arXiv"
+        venue_s = "arXiv"
     elif "booktitle" in pub:
         venue_s = pub["booktitle"]
+    elif "journal" in pub:
+        venue_s = pub["journal"]
+    # the year is shown once per group (see build_block), not on every paper
+    venue_s = venue_s.replace(str(pub["year"]), "").strip()
 
-    return f"""        <article class="paper">
-            <div class="paper-aside">
-                <div class="paper-thumb"><img src="dither/{slug}.png" alt="" width="60" height="60" loading="lazy" /></div>{links_block}
-            </div>
-            <div class="paper-body">
-                <a class="title" href="{html.escape(title_url)}" target="_blank" rel="noopener noreferrer">
-                    {html.escape(title)}
-                </a>
-                <span class="meta authors">{authors_html}</span>
-                <span class="venue">{venue_s.replace(str(pub["year"]), "").strip()} {pub["year"]}</span>
-            </div>
-        </article>"""
+    return f"""                <article class="paper">
+                    <div class="paper-thumb"><img src="dither/{slug}.png" alt="" width="44" height="44" loading="lazy" /></div>
+                    <div class="paper-body">
+                        <a class="title" href="{html.escape(title_url)}" target="_blank" rel="noopener noreferrer">
+                            {html.escape(title)}
+                        </a>
+                        <span class="authors">{authors_html}</span>
+                        <div class="meta">
+                        <span class="venue">{html.escape(venue_s)}</span>{links_block}
+                        </div>
+                    </div>
+                </article>"""
 
 
 def load_publications(tomlfile: Path = TOML):
@@ -180,7 +184,22 @@ def load_publications(tomlfile: Path = TOML):
 
 
 def build_block(pubs):
-    return "\n\n".join(render(p) for p in pubs)
+    """Group consecutive publications by year (toml order is kept)."""
+    groups = []
+    for p in pubs:
+        if groups and groups[-1][0] == p["year"]:
+            groups[-1][1].append(p)
+        else:
+            groups.append((p["year"], [p]))
+    return "\n\n".join(
+        f"""        <div class="year-group">
+            <h3 class="year">{year}</h3>
+            <div class="year-papers">
+{chr(10).join(render(p) for p in group)}
+            </div>
+        </div>"""
+        for year, group in groups
+    )
 
 
 def inject(text, block):

@@ -341,8 +341,14 @@ that's the judgment the metrics can't fully make.
 - `.dither-band` (hero) has `image-rendering: pixelated` and a mask that fades
   its top edge into the paper. `.paper-thumb img` are the 44px fingerprints,
   also pixelated.
-- Layout is fl…exbox column with a sticky footer; papers are a 2-col grid
-  (thumb + body). Responsive breakpoint around 34rem. Print styles hide art.
+- Layout: `.content` is a 2-col grid — a sticky identity rail (`--rail`,
+  hero + name + role + socials) and the publication column (`--measure`).
+  Papers are grouped by year: `.year-group` = sticky year label in a left
+  gutter + the papers. Each paper is thumb + body; venue and links share one
+  `.meta` line so entries stay ~4 lines tall (goal: most papers above the fold).
+- Breakpoints: ≤52rem → single column, the rail becomes a compact header with
+  the hero as a full-bleed 4rem strip (`object-fit: cover`); ≤34rem → year
+  labels move above their group, smaller thumbs. Print styles hide art.
 
 Keep formatting restrained: minimal bold, no heavy chrome. The vibe is quiet
 field-notebook, not a dashboard.
@@ -352,9 +358,12 @@ field-notebook, not a dashboard.
 ## 9. index.html — the page
 
 Hand-written except the Publications section (between the markers). Structure:
-`.masthead` (hero `<img>`, `<h1>` name, `.role`, `.socials` icons) → `<section>`
-with `<h2>Publications</h2>` and the generated `<article class="paper">` blocks →
-`<footer>`. Uses KaTeX (CDN) for any math. Asset paths are relative so the page
+`.content` grid holding `.masthead` (hero `<img>`, `<h1>` name, `.role`,
+`.socials` icons) and `<main>` with `<h2>Publications</h2>` and the generated
+`<div class="year-group">` blocks (each wraps that year's `<article class="paper">`
+entries; `build.py::build_block` groups consecutive same-year papers, so toml
+order still decides page order) → `<footer>`. The venue is printed without the
+year, since the group label already shows it. Uses KaTeX (CDN) for any math. Asset paths are relative so the page
 works opened directly from disk. **Do not hand-edit between the PUBLICATIONS
 markers** — run `build.py` instead.
 
