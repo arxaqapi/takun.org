@@ -1,6 +1,6 @@
 /*  ========================================================================
     takun.org — "field notebook / riso" redesign
-    Paper & ink, one oxblood accent, mono utility labels, dithered decoration.
+    Paper & ink, one oxblood accent, mono utility labels, physarum decoration.
     ======================================================================== */
 
 :root {
@@ -13,6 +13,13 @@
     --accent-soft: #b5695f;
     --slate: #3a4a52;
     --accent-rgb: 138, 47, 36;
+    --art-filter: none;
+    --hero-opacity: 0.92;
+    --thumb-opacity: 1;
+    --icon-filter: none;
+    --toggle-moon: block;  /* icon shows the theme a click switches to */
+    --toggle-sun: none;
+    color-scheme: light;
 
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
         Georgia, serif;
@@ -32,8 +39,10 @@
     box-sizing: inherit;
 }
 
+/* dark tokens: follow the system unless the toggle pinned light; keep the
+   two blocks in sync */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
         --paper: #17161b;
         --paper-2: #201f26;
         --ink: #e8e3d6;
@@ -43,7 +52,33 @@
         --accent-soft: #e0a89e;
         --slate: #9fb4bd;
         --accent-rgb: 217, 138, 126;
+        --art-filter: invert(1) hue-rotate(180deg);
+        --hero-opacity: 0.85;
+        --thumb-opacity: 0.85;
+        --icon-filter: invert(0.9);
+        --toggle-moon: none;
+        --toggle-sun: block;
+        color-scheme: dark;
     }
+}
+
+:root[data-theme="dark"] {
+    --paper: #17161b;
+    --paper-2: #201f26;
+    --ink: #e8e3d6;
+    --ink-soft: #b3ad9f;
+    --rule: #33313b;
+    --accent: #d98a7e;
+    --accent-soft: #e0a89e;
+    --slate: #9fb4bd;
+    --accent-rgb: 217, 138, 126;
+    --art-filter: invert(1) hue-rotate(180deg);
+    --hero-opacity: 0.85;
+    --thumb-opacity: 0.85;
+    --icon-filter: invert(0.9);
+    --toggle-moon: none;
+    --toggle-sun: block;
+    color-scheme: dark;
 }
 
 html {
@@ -89,26 +124,21 @@ body {
     top: 3.5rem;
 }
 
-.dither-band {
+.hero-band {
     display: block;
     width: 100%;
     height: auto;
     margin: 0 0 1.3rem;
-    image-rendering: pixelated;
-    opacity: 0.92;
+    opacity: var(--hero-opacity);
     -webkit-user-select: none;
     user-select: none;
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 100%);
     mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-
-    .dither-band,
-    .paper-thumb img {
-        filter: invert(1) hue-rotate(180deg);
-        opacity: 0.85;
-    }
+.hero-band,
+.paper-thumb img {
+    filter: var(--art-filter);
 }
 
 .masthead h1 {
@@ -159,13 +189,10 @@ body {
     width: 22px;
     height: 22px;
     display: block;
+    filter: var(--icon-filter);
 }
 
-@media (prefers-color-scheme: dark) {
-    .socials img {
-        filter: invert(0.9);
-    }
-}
+
 
 /* publications */
 h2 {
@@ -257,15 +284,13 @@ h6::before {
     height: 3.25rem;
     display: grid;
     place-items: center;
-    background: var(--paper-2);
-    border: 1px solid var(--rule);
 }
 
 .paper-thumb img {
     width: 2.75rem;
     height: 2.75rem;
-    image-rendering: pixelated;
     display: block;
+    opacity: var(--thumb-opacity);
 }
 
 .paper-body {
@@ -443,7 +468,10 @@ footer {
     margin: 3rem auto 1.6rem;
     padding-top: 1rem;
     border-top: 1px solid var(--rule);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* keeps the theme icon on the text's centre line */
+    gap: 0.5rem;
     font-family: var(--mono);
     font-size: 0.78rem;
     letter-spacing: 0.03em;
@@ -456,6 +484,42 @@ footer a {
 
 footer .accent {
     color: var(--accent);
+}
+
+.theme-toggle {
+    display: inline-flex;
+    position: relative;
+    top: -0.05em;  /* line-box centre sits slightly below cap centre */
+    padding: 0.2rem;
+    border: 0;
+    background: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+    opacity: 0.72;
+    transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.theme-toggle[hidden] {
+    display: none;  /* stays hidden without JS */
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    opacity: 1;
+    color: var(--accent);
+}
+
+.theme-toggle svg {
+    width: 15px;
+    height: 15px;
+}
+
+.theme-toggle .moon {
+    display: var(--toggle-moon);
+}
+
+.theme-toggle .sun {
+    display: var(--toggle-sun);
 }
 
 /* narrow screens: single column, compact header */
@@ -482,7 +546,7 @@ footer .accent {
         margin-bottom: 2rem;
     }
 
-    .dither-band {
+    .hero-band {
         grid-area: band;
         width: calc(100% + 2rem);
         height: 4rem;
@@ -553,6 +617,15 @@ footer .accent {
         background: #fff;
     }
 
+    .paper-thumb img {
+        filter: none;
+        opacity: 1;
+    }
+
+    .theme-toggle {
+        display: none;
+    }
+
     .content {
         display: block;
     }
@@ -561,7 +634,7 @@ footer .accent {
         position: static;
     }
 
-    .dither-band,
+    .hero-band,
     .socials {
         display: none;
     }
