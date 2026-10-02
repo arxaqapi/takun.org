@@ -12,7 +12,7 @@ Each publication may define:
     title, authors, year, doi, preprint   -> title link + preprint link
     code                                   -> "code" link
     [publication.materials] name = url     -> one link per named material
-    tags                                   -> dithered thumbnail (via gen_dither)
+    tags                                   -> physarum thumbnail (via gen_physarum)
 
 Author display (initials, bold "me", co-author links) is configured in authors.py.
 
@@ -166,7 +166,7 @@ def render(pub):
     venue_s = venue_s.replace(str(pub["year"]), "").strip()
 
     return f"""                <article class="paper">
-                    <div class="paper-thumb"><img src="dither/{slug}.png" alt="" width="44" height="44" loading="lazy" /></div>
+                    <div class="paper-thumb"><img src="art/{slug}.png" alt="" width="44" height="44" loading="lazy" /></div>
                     <div class="paper-body">
                         <a class="title" href="{html.escape(title_url)}" target="_blank" rel="noopener noreferrer">
                             {html.escape(title)}

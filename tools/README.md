@@ -1,68 +1,86 @@
-# Dithered art generator
+# Physarum art generator
 
-Generates the 1-bit Floyd–Steinberg art used on the site:
+`gen_physarum.py` grows the site's art with a slime-mould (physarum) agent
+simulation, after [bleuje's explanation](https://bleuje.com/physarum-explanation/)
+of Jeff Jones' model and Sage Jenson's "36 points" extension:
 
-- `dither/hero.png` — the layered dithered landscape band in the header.
-- `dither/<slug>.png` — one **fingerprint** per publication, composed from tags.
+- `art/hero.png` is the header band. Every tag used on the site gets its own
+  region, and the regions blend at the seams.
+- `art/<slug>.png` is one **fingerprint** per publication, grown from its tags.
 
 ## Usage
 
 ```bash
-pip install pillow numpy
-python tools/gen_dither.py
+uv run tools/gen_physarum.py   # deps (numpy, pillow) are declared inline
+python tools/build.py          # refresh the Publications HTML
 ```
 
-Output is written to `../dither/` relative to the script.
+A full run takes about 3 min. Output is deterministic: seeds come from the slug and tags.
 
-## How fingerprints work
+Everything is **supersampled**. The simulation runs at `RES` (3) times the
+reference grid (336 px per thumbnail, 2240×600 for the hero), then it's
+downsampled with Lanczos to `THUMB_PX` (224) and `HERO_PX` (1680×450). That
+keeps the filaments thin and crisp at any pixel density.
 
-Each paper is a `(slug, [tags])` entry in the `PAPERS` list. A fingerprint is
-built by compositing one visual primitive per tag, so papers with different tags
-look genuinely different, while the per-slug seed keeps each image unique and
-stable across runs.
+## The model
 
-- The **first tag anchors** the composition (dominant silhouette); later tags
-  layer in with decreasing weight (`0.7 ** position`).
-- Reordering a paper's tags changes which feel dominates.
+Each agent senses the trail map at three points (left, ahead, right), turns
+toward the strongest, moves, and deposits `sqrt(count)` per pixel. The map is
+then partially blurred (3×3) and decays. Sensor distance, sensor angle, rotation
+angle and move distance each depend on the trail value `x` under the agent:
+`base + amp * x**exp`. One full parameter set is a `Point`.
 
-## Tag feels
+## Tags = species, mixed spatially
 
-Each tag has its own characteristic look (defined in `TAG_FEELS`):
+Each tag in `TAGS` is a `Point` plus an initial layout (`uniform`, `disc` or
+`seed`). For a paper with several tags, every tag gets a smooth noise-shaped
+**territory**, and runs as its own **species**, after Sage Jenson's
+multi-species physarum. Each species has its own population and trail map. It
+spawns and deposits in proportion to its territory, and it also senses the
+other species' trails a little (`couple`, 0.3), so neighbouring organisms meet
+and intertwine at the borders.
 
-| tag               | feel                                                    |
-|-------------------|---------------------------------------------------------|
-| `speech`          | horizontal waveform / spectrogram bands                 |
-| `longform`        | slow low-frequency horizontal drift                     |
-| `self-supervised` | dense interfering ripples (moiré / emergent structure)  |
-| `benchmark`       | crisp measurement grid / checkered lattice              |
-| `evolution`       | branching Voronoi cellular web                           |
-| `analogy`         | mirrored symmetry with a central seam (A:B :: C:D)      |
-| `child`           | soft, calm, low-frequency blobs                          |
+- The first tag claims the most ground. Each later tag gets `falloff` (0.25)
+  times less, and is drawn at `emphasis` (0.7) times the weight.
+- Each species is shown at the same contrast inside its own territory, so soft
+  organisms aren't drowned out by bright, tight lines.
+- Reordering tags changes which one dominates.
 
-## Adding a publication
+Blending the parameters themselves (bleuje's point mixing) was tried first. At
+high resolution, almost every blend settled into the same generic mesh, so the
+tags stopped reading as distinct.
 
-1. Add an entry to `PAPERS`, e.g.
-   ```python
-   ("my-new-paper", ["speech", "self-supervised"]),
-   ```
-   (unknown tags raise an error listing the valid ones.)
-2. Re-run the script.
-3. Reference it in `index.html`:
-   ```html
-   <div class="paper-thumb">
-     <img src="dither/my-new-paper.png" alt="" width="44" height="44" loading="lazy" />
-   </div>
-   ```
+| tag               | organism                                              |
+|-------------------|-------------------------------------------------------|
+| `speech`          | silky streams drifting horizontally (waveform-ish)    |
+| `longform`        | long, slow, smoky sweeping filaments (high inertia)   |
+| `self-supervised` | thick coral labyrinth: sensors reach and splay further in dense trail |
+| `benchmark`       | stable polygonal mesh (classic reticular network)     |
+| `evolution`       | veins branching out from a few colonies               |
+| `analogy`         | mirrored veins (trail folded onto its reflection)     |
+| `child`           | scattered beads and short dashes                      |
 
-## Adding a new tag feel
+## Adding a tag
 
-Write a `feel_<name>(n, rng) -> np.ndarray` returning a field in ~[0,1]
-(higher = more ink), then register it in `TAG_FEELS` and give it a weight in
-`TAG_WEIGHT`. Keep it visually distinct from the existing feels.
+Add an entry to `TAGS`. You don't need new code:
 
-## Tweaking
+```python
+"cross-lingual": dict(
+    point=Point(sd=(6, 0, 1), sa=(30, 20, 1), ra=(25, 0, 1), md=(1, 0, 1),
+                inertia=0.4, decay=0.9, diffuse=0.3),
+    init="uniform",
+),
+```
 
-- `SIZE` sets fingerprint resolution (upscaled ×2 on save, nearest-neighbour).
-- `to_png(..., ink=(r,g,b))` shifts the ink colour. Paper stays transparent so
-  the CSS background shows through; dark mode inverts via CSS.
-- `make_hero(...)` builds the header band (layered ridgelines + sky gradient).
+Unknown tags raise an error that lists the valid ones. Useful knobs:
+
+- `sd` (sensor distance) sets the feature scale. It's measured in pixels on the 112 px reference grid.
+- `sa > ra` gives static meshes. `ra > sa` gives restless, contracting forms.
+- `inertia` smooths paths into long curves. `level` biases headings toward horizontal.
+- `decay` and `diffuse` set how long trails persist and how soft they look.
+- `mirror` sets bilateral symmetry. `respawn` sends agents back to their starting layout.
+
+## Output
+
+PNG ink on transparent paper. The alpha channel holds the toned trail density,
+so the CSS background shows through and dark mode inverts it with a filter.
