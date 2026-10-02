@@ -1,31 +1,51 @@
 [[publication]]
-key = "sheth2026derivingbenchmarkingdatasetslongform"
-type = "misc"
+key = "sheth26_interspeech"
+type = "inproceedings"
 title = "Deriving Benchmarking Datasets from Long-Form Recordings: Challenges and Opportunities"
 authors = ["Kaveri K. Sheth", "Lawrence Borst", "Tarek Kunze", "Marvin Lavechin", "Okko Räsänen", "Sho Tsuji", "Loann Peurey", "Alix Bourrée", "Alejandrina Cristia"]
 year = 2026
+booktitle = "Interspeech 2026"
+pages = "4908--4913"
+doi = "10.21437/Interspeech.2026-2363"
+issn = "2958-1796"
 tags = ["benchmark", "longform", "child"]
 preprint = "https://arxiv.org/abs/2607.03201"
+[publication.materials]
+paper = "https://www.isca-archive.org/interspeech_2026/sheth26_interspeech.html"
 
 [[publication]]
-key = "charlot2026contextawarechilddirectedspeechdetection"
-type = "misc"
+key = "charlot26b_interspeech"
+type = "inproceedings"
 title = "Context-aware child-directed speech detection from long-form recordings"
 authors = ["Théo Charlot", "Tarek Kunze", "Kaveri K. Sheth", "Alejandrina Cristia", "Marvin Lavechin"]
 year = 2026
+booktitle = "Interspeech 2026"
+pages = "4902--4907"
+doi = "10.21437/Interspeech.2026-2780"
+issn = "2958-1796"
 tags = ["speech", "child", "longform"]
 preprint = "https://arxiv.org/abs/2606.01134"
 code = "https://github.com/LAAC-LSCP/addressee"
+[publication.materials]
+paper = "https://www.isca-archive.org/interspeech_2026/charlot26b_interspeech.html"
+poster = "assets/papers/2026_IS_addressee_poster.pdf"
 
 [[publication]]
-key = "charlot2026babyhubertmultilingualselfsupervisedlearning"
-type = "misc"
+key = "charlot26_interspeech"
+type = "inproceedings"
 title = "BabyHuBERT: Multilingual Self-Supervised Learning for Segmenting Speakers in Child-Centered Long-Form Recordings"
 authors = ["Théo Charlot", "Tarek Kunze", "Maxime Poli", "Alejandrina Cristia", "Emmanuel Dupoux", "Marvin Lavechin"]
 year = 2026
+booktitle = "Interspeech 2026"
+pages = "4896--4901"
+doi = "10.21437/Interspeech.2026-2772"
+issn = "2958-1796"
 tags = ["self-supervised", "speech", "child"]
-preprint = "https://github.com/LAAC-LSCP/VTC"
+preprint = "https://arxiv.org/abs/2509.15001"
 code = "https://github.com/LAAC-LSCP/VTC"
+[publication.materials]
+paper = "https://www.isca-archive.org/interspeech_2026/charlot26_interspeech.html"
+poster = "assets/papers/2026_IS_BabyHuBERT_poster.pdf"
 
 [[publication]]
 key = "kunze25_interspeech"
@@ -42,7 +62,7 @@ tags = ["speech", "benchmark", "child"]
 preprint = "https://arxiv.org/abs/2506.11074"
 code = "https://github.com/LAAC-LSCP/VTC-IS-25"
 [publication.materials]
-poster = "assets/papers/2025_IS_vtc_poster.pdf"
+poster = "assets/papers/2025_IS_vtc_poster_interspeech_1962.pdf"
 paper = "https://www.isca-archive.org/interspeech_2025/kunze25_interspeech.pdf"
 
 [[publication]]
