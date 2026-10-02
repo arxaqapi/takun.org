@@ -146,9 +146,9 @@ def render(pub):
     )
     links_block = (
         f"""
-                <div class="links">
+                <nav class="links">
 {link_lines}
-                </div>"""
+                </nav>"""
         if links
         else ""
     )
@@ -162,14 +162,15 @@ def render(pub):
         venue_s = pub["booktitle"]
 
     return f"""        <article class="paper">
-            <div class="paper-thumb"><img src="dither/{slug}.png" alt="" width="44" height="44" loading="lazy" /></div>
+            <div class="paper-aside">
+                <div class="paper-thumb"><img src="dither/{slug}.png" alt="" width="60" height="60" loading="lazy" /></div>{links_block}
+            </div>
             <div class="paper-body">
                 <a class="title" href="{html.escape(title_url)}" target="_blank" rel="noopener noreferrer">
                     {html.escape(title)}
                 </a>
                 <span class="meta authors">{authors_html}</span>
                 <span class="venue">{venue_s.replace(str(pub["year"]), "").strip()} {pub["year"]}</span>
-                {links_block}
             </div>
         </article>"""
 
